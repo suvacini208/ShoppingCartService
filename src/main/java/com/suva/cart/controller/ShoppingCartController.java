@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.suva.cart.domain.Cart;
 import com.suva.cart.domain.CartDetails;
 import com.suva.cart.domain.Item;
+import com.suva.cart.domain.Order;
 import com.suva.cart.service.CartService;
 
 @RestController
@@ -52,8 +53,9 @@ public class ShoppingCartController {
 	/*
 	 * Checkout the shopping cart and create the order
 	 */
-	public void checkout() {
-
+	@PostMapping("/cart/{cartId}/checkout")
+	public Order checkout(@PathVariable @Min(value = 1, message = "CartId cant be empty") long cartId) {
+		return cartService.checkout(cartId);
 	}
 
 }
