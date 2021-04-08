@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 public class Cart {
-	
+
 	private long id;
 	
 	@Valid
@@ -15,6 +15,13 @@ public class Cart {
 	
 	@Transient
 	public static final String DB_SEQ = "cart";
+	
+	public Cart() {}
+	public Cart(@Valid User user) {
+		super();
+		this.user = user;
+	}
+
 	public long getId() {
 		return id;
 	}

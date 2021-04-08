@@ -26,6 +26,17 @@ public class User {
 	@Valid
 	@NotEmpty(message = "Address cant be emtpy")
 	private List<Address> address = new ArrayList<>();
+	public User() {}
+	public User(@NotBlank(message = "Username cant be blank") String userName,
+			@NotBlank(message = "EmailId cant be blank") @Email(message = "EmailId format is incorrect") String emailId,
+			@NotBlank(message = "Phone cant be blank") @Length(min = 10, max = 10) String phone,
+			@Valid @NotEmpty(message = "Address cant be emtpy") List<Address> address) {
+		super();
+		this.userName = userName;
+		this.emailId = emailId;
+		this.phone = phone;
+		this.address = address;
+	}
 	public String getUserName() {
 		return userName;
 	}

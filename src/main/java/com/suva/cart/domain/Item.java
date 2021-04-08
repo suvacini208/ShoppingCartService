@@ -1,10 +1,19 @@
 package com.suva.cart.domain;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class Item {
 
+	@Min(value = 1, message = "Id can't be less than 1")
 	public long id;
+	
+	@NotBlank(message = "Description can't be blank")
 	public String description;
+	
+	@Min(value = 1, message = "Quantity can't be less than 1")
 	public int quantity;
+	
 	public float price;
 	
 	public Item() {}

@@ -39,6 +39,15 @@ public class CartService {
 
 	@Value("${order.service.url}")
 	private String orderServiceUrl;
+	
+	/**
+	 * Get Cart information 
+	 * @param cartId
+	 * @return
+	 */
+	public CartDetails getCartInformation(long cartId) {
+		return getCartDetails(getCart(cartId));
+	}
 
 	/**
 	 * Create cart in the data store. Before persisting get the db sequence for cart
@@ -81,11 +90,13 @@ public class CartService {
 		com.suva.cart.entity.Cart cart = getCart(cartId);
 		boolean itemAlreadyExist = false;
 
-		for (Item item : cart.getItems()) {
-			// If the item already present, then update the quantity
-			if (item.getId() == item1.getId()) {
-				item.setQuantity(item.getQuantity() + item1.getQuantity());
-				itemAlreadyExist = true;
+		if(!cart.getItems().isEmpty()) {
+			for (Item item : cart.getItems()) {
+				// If the item already present, then update the quantity
+				if (item.getId() == item1.getId()) {
+					item.setQuantity(item.getQuantity() + item1.getQuantity());
+					itemAlreadyExist = true;
+				}
 			}
 		}
 
@@ -209,12 +220,12 @@ public class CartService {
 			HttpEntity<Order> request = new HttpEntity<Order>(order);
 			ResponseEntity<Order> orderEntity = restTemplate.postForEntity(orderServiceUrl, request, Order.class);
 			if (orderEntity.getStatusCode() == HttpStatus.OK) {
-				return orderEntity.getBody();
+				order = orderEntity.getBody();
 			}
 
 			// Delete the shopping cart
-			//TODO Not working - check
 			cartRepository.deleteById(cartId);
+			return order;
 		}
 		return null;
 	}

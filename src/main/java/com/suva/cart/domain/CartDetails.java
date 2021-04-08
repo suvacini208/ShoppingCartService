@@ -11,33 +11,49 @@ public class CartDetails {
 	@Id
 	private long id;
 	private List<Item> items = new ArrayList<Item>();
-	
+
 	private User user;
-	
+
 	@Transient
 	public static final String DB_SEQ = "cart";
+
+	public CartDetails(long id, List<Item> items, User user) {
+		super();
+		this.id = id;
+		this.items = items;
+		this.user = user;
+	}
+
+	public CartDetails() {
+	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public List<Item> getItems() {
-		if(items == null) {
+		if (items == null) {
 			items = new ArrayList<Item>();
 		}
 		return items;
 	}
+
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
+
 	public User getUser() {
 		return user == null ? new User() : user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Cart [id=" + id + ", items=" + items + ", user=" + user + "]";
@@ -52,7 +68,7 @@ public class CartDetails {
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,4 +92,5 @@ public class CartDetails {
 			return false;
 		return true;
 	}
+
 }

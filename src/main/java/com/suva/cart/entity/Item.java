@@ -7,6 +7,15 @@ public class Item {
 	public int quantity;
 	public float price;
 	
+	public Item() {}
+	
+	public Item(long id, String description, int quantity, float price) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.quantity = quantity;
+		this.price = price;
+	}
 	public long getId() {
 		return id;
 	}

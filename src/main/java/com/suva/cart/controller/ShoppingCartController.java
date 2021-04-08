@@ -6,6 +6,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,11 @@ public class ShoppingCartController {
 	public CartDetails updateItem(@PathVariable @Min(value = 1, message = "CartId cant be empty") long cartId,
 			@Valid @RequestBody Item item) {
 		return cartService.updateItem(cartId, item);
+	}
+	
+	@GetMapping("/cart/{cartId}")
+	public CartDetails getCartDetails(@PathVariable @Min(value = 1, message = "CartId cant be empty") long cartId) {
+		return cartService.getCartInformation(cartId);
 	}
 
 	/*

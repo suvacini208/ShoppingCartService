@@ -18,6 +18,16 @@ public class Cart {
 	
 	@Transient
 	public static final String DB_SEQ = "cart";
+	
+	public Cart() {}
+	
+	public Cart(long id, List<Item> items, User user) {
+		super();
+		this.id = id;
+		this.items = items;
+		this.user = user;
+	}
+
 	public long getId() {
 		return id;
 	}
